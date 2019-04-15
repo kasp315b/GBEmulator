@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C8DCC20F-D775-41F1-AF50-258D51142B03}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GBEmulator</RootNamespace>
+    <AssemblyName>GBEmulator</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GBE\Decompiler.cs" />
+    <Compile Include="GBE\Memory\Block.cs" />
+    <Compile Include="GBE\Memory\IMemoryRange.cs" />
+    <Compile Include="GBE\Memory\MemoryRegister.cs" />
+    <Compile Include="GBE\Memory\ReadOnly.cs" />
+    <Compile Include="GBE\Memory\Registers.cs" />
+    <Compile Include="GBE\Memory\MemoryManager.cs" />
+    <Compile Include="GBE\Memory\RangeOffset.cs" />
+    <Compile Include="GBE\Memory\RerouteRanges.cs" />
+    <Compile Include="GBE\Memory\Sinkhole.cs" />
+    <Compile Include="GBE\Memory\TriggeredBlock.cs" />
+    <Compile Include="GBE\Processor\IInstruction.cs" />
+    <Compile Include="GBE\Processor\Instructions\Extended\OPCB11_RLC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Extended\OPCB7C_BIT7H.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP01_LDBCu16.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP02_LD%28BC%29A.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP04_INCB.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP05_DECB.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP06_LDBu8.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP08_LD%28u16%29SP.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP09_ADDHLBC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP0A_LDA%28BC%29.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP0C_INCC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP0D_DECC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP0E_LDCu8.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP11_LDDEu16.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP12_LD%28DE%29A.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP14_INCD.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP15_DECD.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP16_LDDu8.cs" />
+    <Compile Include="GBE\Processor\Instructions\OP17_RLA.cs" />
+    <Compile Include="GBE\Processor\Instructions\OP18_JRr8.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP1A_LDA%28DE%29.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP1D_DECE.cs" />
+    <Compile Include="GBE\Processor\Instructions\OP20_JRNZr8.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP21_LDHLu16.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP22_LD%28HL+%29A.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP25_DECH.cs" />
+    <Compile Include="GBE\Processor\Instructions\OP28_JRZr8.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP29_ADDHLHL.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP2E_LDLu8.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP31_LDSPu16.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP32_LD%28HL-%29A.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP3A_LDA%28HL-%29.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP3D_DECA.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP3E_LDAu8.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP40_LDBB.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP41_LDBC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP42_LDBD.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP43_LDBE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP44_LDBH.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP45_LDBL.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP47_LDBA.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP48_LDCB.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP49_LDCC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP4A_LDCD.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP4B_LDCE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP4D_LDCL.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP4F_LDCA.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP50_LDDB.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP51_LDDC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP52_LDDD.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP53_LDDE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP54_LDDH.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP55_LDDL.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Special\OP00_NOP.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP57_LDDA.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP58_LDEB.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP59_LDEC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP5A_LDED.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP5B_LDEE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP5C_LDEH.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP5D_LDEL.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP67_LDHA.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP68_LDLB.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP69_LDLC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP6A_LDLD.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP6B_LDLE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP6C_LDLH.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP6D_LDLL.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP77_LD%28HL%29A.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP78_LDAB.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP80_ADDAB.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP81_ADDAC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP82_ADDAD.cs" />
+    <Compile Include="GBE\Processor\Instructions\OP83_ADDAE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP84_ADDAH.cs" />
+    <Compile Include="GBE\Processor\Instructions\OP85_ADDAL.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP86_ADDA%28HL%29.cs" />
+    <Compile Include="GBE\Processor\Instructions\OP87_ADDAA.cs" />
+    <Compile Include="GBE\Processor\Instructions\OP99_SBCAC.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPA8_XORB.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPA9_XORC.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPAA_XORD.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPAB_XORE.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPAC_XORH.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP03_INCBC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP0B_DECBC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP13_INCDE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP1B_DECDE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP23_INCHL.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP2B_DECHL.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP33_INCSP.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP3B_DECSP.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP4C_LDCH.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPAF_XORA.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPB1_ORAC.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPC0_RETNZ.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPC1_POPBC.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPC5_PUSHBC.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPC9_RET.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPCB_PREFIX.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPCD_CALLa16.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPDC_CALLCd16.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OPE0_LD%28FF00+u8%29A.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OPE2_LD%28FF00+C%29A.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPE6_ANDAu8.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPEA_LD%28a16%29A.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Special\OPF3_DI.cs" />
+    <Compile Include="GBE\Processor\Instructions\OPFF_RST38H.cs" />
+    <Compile Include="GBE\Processor\Processor.cs" />
+    <Compile Include="GraphicsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicsForm.Designer.cs">
+      <DependentUpon>GraphicsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GraphicsForm.resx">
+      <DependentUpon>GraphicsForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GBE\Processor\Instructions\Verified\Arithmetics\Rotates\" />
+    <Folder Include="GBE\ROMs\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
