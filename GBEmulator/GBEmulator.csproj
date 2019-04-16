@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GBE\Decompiler.cs" />
+    <Compile Include="GBE\Gameboy.cs" />
     <Compile Include="GBE\Graphics\PPU.cs" />
     <Compile Include="GBE\Memory\BankedBlock.cs" />
     <Compile Include="GBE\Memory\BitFieldByte.cs" />

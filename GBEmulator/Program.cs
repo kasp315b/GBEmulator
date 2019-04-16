@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GBEmulator.GBE;
 using GBEmulator.GBE.Memory;
 using GBEmulator.GBE.Processor;
 using GBEmulator.GBE.Graphics;
@@ -23,9 +24,10 @@ namespace GBEmulator
             //GraphicsForm form = new GraphicsForm();
             //form.Show();
 
-            MemoryManager mem = new MemoryManager();
-            Processor proc = new Processor(mem);
-            PPU ppu = new PPU(mem);
+            Gameboy gb = new Gameboy();
+            MemoryManager mem = gb.memory;
+            Processor proc = gb.processor;
+            PPU ppu = gb.ppu;
 
             int count = 1;
             bool wait = true;

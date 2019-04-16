@@ -9,6 +9,8 @@ namespace GBEmulator.GBE.Graphics
 {
     public class PPU
     {
+        public Gameboy gameboy;
+
         private MemoryManager memory;
 
         public IMemoryRange bgDisplayData1;
@@ -123,9 +125,10 @@ namespace GBEmulator.GBE.Graphics
         }
         #endregion
 
-        public PPU(MemoryManager memManager)
+        public PPU(Gameboy gameboy)
         {
-            memory = memManager;
+            this.gameboy = gameboy;
+            memory = gameboy.memory;
 
             VBK = new MemoryRegister(0xFF4F);
             Block charData0 = new Block(0x9800 - 0x8000);

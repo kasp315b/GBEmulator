@@ -12,11 +12,15 @@ namespace GBEmulator.GBE.Memory
         public static readonly byte[] bootstrapROMBytes = GetBootROMBytes();
         public static readonly byte[] tetrisWorldROM = GetTetrisWorldROM();
 
+        public Gameboy gameboy;
+
         private List<IMemoryRange> ranges;
         private Sinkhole sinkhole;
 
-        public MemoryManager()
+        public MemoryManager(Gameboy gameboy)
         {
+            this.gameboy = gameboy;
+
             ranges = new List<IMemoryRange>();
             sinkhole = new Sinkhole();
 

@@ -13,7 +13,6 @@ namespace GBEmulator.GBE.Processor
 {
     public class Processor
     {
-
         public const byte BIT_0 = 0b00000001;
         public const byte BIT_1 = 0b00000010;
         public const byte BIT_2 = 0b00000100;
@@ -37,6 +36,8 @@ namespace GBEmulator.GBE.Processor
         public static IInstruction[] InstructionMap = CreateInstructionMap();
         public static IInstruction[] CBInstructionMap = CreateCBInstructionMap();
 
+        public Gameboy gameboy;
+
         public Registers registers;
         public MemoryManager memory;
         public int cycles;
@@ -51,15 +52,17 @@ namespace GBEmulator.GBE.Processor
         public string[] lastInstructions = new string[100];
         public int lastInstructionLog = 0;
 
-        public Processor(MemoryManager memManager)
+        public Processor(Gameboy gameboy)
         {
+            this.gameboy = gameboy;
+
             registers = new Registers();
 
             interruptsMasterEnable = false;
             interruptEnableRegister = new MemoryRegister(0xFFFF);
             interruptFlagRegister = new MemoryRegister(0xFF0F);
 
-            memory = memManager;
+            memory = gameboy.memory;
             memory.Add(interruptEnableRegister);
             memory.Add(interruptFlagRegister);
 
