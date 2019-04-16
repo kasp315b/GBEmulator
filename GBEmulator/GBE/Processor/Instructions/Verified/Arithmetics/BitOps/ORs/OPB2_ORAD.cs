@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace GBEmulator.GBE.Processor.Instructions
 {
-    public class OPC5_PUSHBC : IInstruction
+    public class OPB2_ORAD : IInstruction
     {
         public void Execute(Processor processor)
         {
-            processor.WordPushStack(processor.registers.BC);
+            Processor.OP_ORr_r(processor, ref processor.registers.A, ref processor.registers.D);
         }
 
         public int Duration()
         {
-            return 16;
+            return 4;
         }
     }
 }

@@ -51,15 +51,15 @@ namespace GBEmulator.GBE.Processor
         public string[] lastInstructions = new string[100];
         public int lastInstructionLog = 0;
 
-        public Processor()
+        public Processor(MemoryManager memManager)
         {
             registers = new Registers();
 
-            interruptsMasterEnable = false  ;
+            interruptsMasterEnable = false;
             interruptEnableRegister = new MemoryRegister(0xFFFF);
             interruptFlagRegister = new MemoryRegister(0xFF0F);
 
-            memory = new MemoryManager();
+            memory = memManager;
             memory.Add(interruptEnableRegister);
             memory.Add(interruptFlagRegister);
 
@@ -347,6 +347,38 @@ namespace GBEmulator.GBE.Processor
             r += mem;
             processor.SetFlag(FLAG_ZERO, r == 0);
 
+        }
+
+        public static void OP_ORr_r(Processor processor, ref byte ra, ref byte rb)
+        {
+            processor.SetFlag(FLAG_ZERO, (ra | rb) == 0);
+            processor.SetFlag(FLAG_SUB, false);
+            processor.SetFlag(FLAG_HALF_CARRY, false);
+            processor.SetFlag(FLAG_CARRY, false);
+        }
+
+        public static void OP_XORr_r(Processor processor, ref byte ra, ref byte rb)
+        {
+            ra ^= rb;
+            processor.SetFlag(FLAG_ZERO, ra == 0);
+            processor.SetFlag(FLAG_SUB, false);
+            processor.SetFlag(FLAG_HALF_CARRY, false);
+            processor.SetFlag(FLAG_CARRY, false);
+        }
+
+        public static void OP_POPrr(Processor processor, ref ushort rr)
+        {
+            rr = processor.WordPopStack();
+        }
+
+        public static void OP_PUSHrr(Processor processor, ref ushort rr)
+        {
+            processor.WordPushStack(rr);
+        }
+
+        public static void OP_LDma16_r(Processor processor, ref byte r)
+        {
+            processor.memory.Write(AssembleWordReverse(processor.memory.Read(processor.registers.PC++), processor.memory.Read(processor.registers.PC++)), r);
         }
 
         public static void OP_RLA(Processor processor)

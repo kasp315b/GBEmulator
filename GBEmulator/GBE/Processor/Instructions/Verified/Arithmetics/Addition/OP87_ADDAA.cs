@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace GBEmulator.GBE.Processor.Instructions
 {
-    public class OPAF_XORA : IInstruction
+    public class OP87_ADDAA : IInstruction
     {
         public void Execute(Processor processor)
         {
-            processor.registers.A ^= processor.registers.A;
-            processor.SetFlag(Processor.FLAG_ZERO, processor.registers.A == 0);
+            Processor.OP_ADDr_r(processor, ref processor.registers.A, ref processor.registers.A);
         }
 
         public int Duration()

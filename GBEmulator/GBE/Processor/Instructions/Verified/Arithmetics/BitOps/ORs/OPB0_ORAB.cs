@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace GBEmulator.GBE.Processor.Instructions
 {
-    public class OPC1_POPBC : IInstruction
+    public class OPB0_ORAB : IInstruction
     {
         public void Execute(Processor processor)
         {
-            processor.registers.BC = processor.WordPopStack();
+            Processor.OP_ORr_r(processor, ref processor.registers.A, ref processor.registers.B);
         }
 
         public int Duration()
         {
-            return 12;
+            return 4;
         }
     }
 }

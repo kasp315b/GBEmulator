@@ -10,13 +10,8 @@ namespace GBEmulator.GBE.Processor.Instructions
     {
         public void Execute(Processor processor)
         {
-            processor.memory.Write(
-                Processor.AssembleWordReverse(
-                    processor.memory.Read(processor.registers.PC++),
-                    processor.memory.Read(processor.registers.PC++)
-                ),
-                processor.registers.A
-            );
+
+            Processor.OP_LDma16_r(processor, ref processor.registers.A);
         }
 
         public int Duration()

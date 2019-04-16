@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GBE\Decompiler.cs" />
+    <Compile Include="GBE\Graphics\PPU.cs" />
+    <Compile Include="GBE\Memory\BankedBlock.cs" />
+    <Compile Include="GBE\Memory\BitFieldByte.cs" />
     <Compile Include="GBE\Memory\Block.cs" />
     <Compile Include="GBE\Memory\IMemoryRange.cs" />
     <Compile Include="GBE\Memory\MemoryRegister.cs" />
@@ -59,6 +62,9 @@
     <Compile Include="GBE\Processor\IInstruction.cs" />
     <Compile Include="GBE\Processor\Instructions\Extended\OPCB11_RLC.cs" />
     <Compile Include="GBE\Processor\Instructions\Extended\OPCB7C_BIT7H.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\ORs\OPB3_ORAE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\ORs\OPB2_ORAD.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\ORs\OPB0_ORAB.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP01_LDBCu16.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP02_LD%28BC%29A.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP04_INCB.cs" />
@@ -130,17 +136,17 @@
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP80_ADDAB.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP81_ADDAC.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP82_ADDAD.cs" />
-    <Compile Include="GBE\Processor\Instructions\OP83_ADDAE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP83_ADDAE.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP84_ADDAH.cs" />
-    <Compile Include="GBE\Processor\Instructions\OP85_ADDAL.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP85_ADDAL.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP86_ADDA%28HL%29.cs" />
-    <Compile Include="GBE\Processor\Instructions\OP87_ADDAA.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Addition\OP87_ADDAA.cs" />
     <Compile Include="GBE\Processor\Instructions\OP99_SBCAC.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPA8_XORB.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPA9_XORC.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPAA_XORD.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPAB_XORE.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPAC_XORH.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\XORs\OPA8_XORB.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\XORs\OPA9_XORC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\XORs\OPAA_XORD.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\XORs\OPAB_XORE.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\XORs\OPAC_XORH.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP03_INCBC.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP0B_DECBC.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP13_INCDE.cs" />
@@ -150,19 +156,19 @@
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Increments\OP33_INCSP.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\Decrements\OP3B_DECSP.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Loads\OP4C_LDCH.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPAF_XORA.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPB1_ORAC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\XORs\OPAF_XORA.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\ORs\OPB1_ORAC.cs" />
     <Compile Include="GBE\Processor\Instructions\OPC0_RETNZ.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPC1_POPBC.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPC5_PUSHBC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Stack\OPC1_POPBC.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Stack\OPC5_PUSHBC.cs" />
     <Compile Include="GBE\Processor\Instructions\OPC9_RET.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPCB_PREFIX.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Special\OPCB_PREFIX.cs" />
     <Compile Include="GBE\Processor\Instructions\OPCD_CALLa16.cs" />
     <Compile Include="GBE\Processor\Instructions\OPDC_CALLCd16.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Loads\OPE0_LD%28FF00+u8%29A.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Loads\OPE2_LD%28FF00+C%29A.cs" />
     <Compile Include="GBE\Processor\Instructions\OPE6_ANDAu8.cs" />
-    <Compile Include="GBE\Processor\Instructions\OPEA_LD%28a16%29A.cs" />
+    <Compile Include="GBE\Processor\Instructions\Verified\Loads\OPEA_LD%28a16%29A.cs" />
     <Compile Include="GBE\Processor\Instructions\Verified\Special\OPF3_DI.cs" />
     <Compile Include="GBE\Processor\Instructions\OPFF_RST38H.cs" />
     <Compile Include="GBE\Processor\Processor.cs" />
@@ -184,7 +190,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="GBE\Processor\Instructions\Verified\Arithmetics\BitOps\ANDs\" />
     <Folder Include="GBE\Processor\Instructions\Verified\Arithmetics\Rotates\" />
+    <Folder Include="GBE\Processor\Instructions\Verified\Flow\" />
     <Folder Include="GBE\ROMs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

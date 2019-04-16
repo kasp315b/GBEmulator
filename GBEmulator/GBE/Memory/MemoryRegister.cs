@@ -8,11 +8,23 @@ namespace GBEmulator.GBE.Memory
 {
     public class MemoryRegister : IMemoryRange
     {
-        public byte value;
+        public BitFieldByte field;
+        public byte value
+        {
+            get
+            {
+                return field.value;
+            }
+            set
+            {
+                field.value = value;
+            }
+        }
         private int offset;
 
         public MemoryRegister(int offset)
         {
+            field = new BitFieldByte();
             this.offset = offset;
         }
 

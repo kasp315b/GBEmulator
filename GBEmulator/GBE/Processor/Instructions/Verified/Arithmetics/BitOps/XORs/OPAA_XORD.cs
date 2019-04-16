@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace GBEmulator.GBE.Processor.Instructions
 {
-    public class OPA9_XORC : IInstruction
+    public class OPAA_XORD : IInstruction
     {
         public void Execute(Processor processor)
         {
-            processor.registers.A ^= processor.registers.C;
-            processor.SetFlag(Processor.FLAG_ZERO, processor.registers.A == 0);
+            Processor.OP_XORr_r(processor, ref processor.registers.A, ref processor.registers.D);
         }
 
         public int Duration()

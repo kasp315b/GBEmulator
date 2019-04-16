@@ -10,10 +10,7 @@ namespace GBEmulator.GBE.Processor.Instructions
     {
         public void Execute(Processor processor)
         {
-            processor.SetFlag(Processor.FLAG_ZERO, (processor.registers.A | processor.registers.C) == 0);
-            processor.SetFlag(Processor.FLAG_SUB, false);
-            processor.SetFlag(Processor.FLAG_HALF_CARRY, false);
-            processor.SetFlag(Processor.FLAG_CARRY, false);
+            Processor.OP_ORr_r(processor, ref processor.registers.A, ref processor.registers.C);
         }
 
         public int Duration()

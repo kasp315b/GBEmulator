@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using GBEmulator.GBE;
 using GBEmulator.GBE.Memory;
 using GBEmulator.GBE.Processor;
+using GBEmulator.GBE.Graphics;
 
 namespace GBEmulator
 {
@@ -23,7 +23,10 @@ namespace GBEmulator
             //GraphicsForm form = new GraphicsForm();
             //form.Show();
 
-            Processor proc = new Processor();
+            MemoryManager mem = new MemoryManager();
+            Processor proc = new Processor(mem);
+            PPU ppu = new PPU(mem);
+
             int count = 1;
             bool wait = true;
             bool print = true;
@@ -39,7 +42,7 @@ namespace GBEmulator
                     {
                         Console.SetCursorPosition(0, 0);
                         StringBuilder screen = new StringBuilder();
-                        screen.AppendLine("Instruction Log:");
+                        screen.AppendLine("Instruction Log:   " + proc.totalInstructionsRan + "           ");
                         for (int i = 0; i < 25; i++)
                         {
                             int logindex = (proc.lastInstructionLog - i);
@@ -156,7 +159,8 @@ namespace GBEmulator
                     switch(key)
                     {
                         case ConsoleKey.Spacebar:
-                            count++;
+                            count = 1;
+                            wait = true;
                             break;
                         case ConsoleKey.D1:
                             count += 10;
